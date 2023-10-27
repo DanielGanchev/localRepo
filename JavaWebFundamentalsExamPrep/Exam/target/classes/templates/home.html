@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::nav}"></header>
+<main>
+
+    <div class="container bg-blur rounded mt-3 mb-4">
+        <h1>All words</h1>
+        <div class="row mt-3 mb-3">
+
+            <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                <h3 class="mySticky bg-gray text-dark rounded" th:text="'German: ' + ${words.germanSize}">German: {germanWordsCount}</h3>
+                    <div th:each="germanWord : ${words.german}" class="mt-3 rounded badge-warning">
+                        <img class="mr-2" src="/img/german.png" alt="Flag" width="20px" height="20px">
+                        <span th:text="${germanWord.term}+ ': '+ ${germanWord.translation} ">{germanTerm}: {translation}</span>
+                        <br>
+                        <span th:text="'Example: ' + ${germanWord.example}">Example: {example}</span>
+                        <br>
+                        <span th:text="'Added by: ' + ${germanWord.username} + ' on ' + ${germanWord.inputDate}" >
+                            Added by: {username} on {inputDate}</span>
+                        <form th:method="POST"
+                              th:action="@{/word/remove/{id}(id=${germanWord.id})}">
+                            <button type="submit" class="custom-button ml-3 text-danger border-0 font-weight-bold bg-transparent">
+                                Remove
+                            </button>
+                        </form>
+                    </div>
+            </div>
+
+            <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                <h3 class="mySticky bg-gray text-dark rounded" th:text="'Spanish: ' + ${words.spanishSize}">Spanish: {spanishWordsCount}</h3>
+                    <div th:each="spanishWord : ${words.spanish}" class="mt-3 rounded badge-secondary">
+                        <img class="mr-2" src="/img/spanish.png" alt="Flag" width="20px" height="20px">
+                        <span th:text="${spanishWord.term}+ ': '+ ${spanishWord.translation} ">{spanishTerm}: {translation}</span>
+                        <br>
+                        <span th:text="'Example: ' + ${spanishWord.example}" >Example: {example}</span>
+                        <br>
+                        <span th:text="'Added by: ' + ${spanishWord.username} + ' on ' + ${spanishWord.inputDate}">Added by: {username} on {inputDate}</span>
+                        <form th:method="POST"
+                              th:action="@{/word/remove/{id}(id=${spanishWord.id})}">
+                            <button type="submit" class="custom-button ml-3 text-danger border-0 font-weight-bold bg-transparent">
+                                Remove
+                            </button>
+                        </form>
+                    </div>
+            </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+            <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                <h3 class="mySticky bg-gray text-dark rounded" th:text="'French: ' + ${words.frenchSize}">French: {frenchWordsCount}</h3>
+                    <div  th:each="frenchWord : ${words.french}" class="mt-3 rounded badge-info">
+                        <img class="mr-2" src="/img/french.png" alt="Flag" width="20px" height="20px">
+                        <span th:text="${frenchWord.term}+ ': '+ ${frenchWord.translation} ">{frenchTerm}: {translation}</span>
+                        <br>
+                        <span th:text="'Example: ' + ${frenchWord.example}">Example: {example}</span>
+                        <br>
+                        <span th:text="'Added by: ' + ${frenchWord.username} + ' on ' + ${frenchWord.inputDate}">Added by: {username} on {inputDate}</span>
+                        <form th:method="POST"
+                              th:action="@{/word/remove/{id}(id=${frenchWord.id})}">
+                            <button type="submit" class="custom-button ml-3 text-danger border-0 font-weight-bold bg-transparent">
+                                Remove
+                            </button>
+                        </form>
+                    </div>
+            </div>
+
+            <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                <h3 class="mySticky bg-gray text-dark rounded" th:text="'Italian: ' + ${words.italianSize}">Italian: {italianWordsCount}</h3>
+                    <div th:each="italianWord : ${words.italian}" class="mt-3 rounded badge-success">
+                        <img class="mr-2" src="/img/italian.png" alt="Flag" width="20px" height="20px">
+                        <span th:text="${italianWord.term}+ ': '+ ${italianWord.translation} ">{italianTerm}: {translation}</span>
+                        <br>
+                        <span th:text="'Example: ' + ${italianWord.example}">Example: {example}</span>
+                        <br>
+                        <span th:text="'Added by: ' + ${italianWord.username} + ' on ' + ${italianWord.inputDate}">Added by: {username} on {inputDate}</span>
+                        <form th:method="POST"
+                              th:action="@{/word/remove/{id}(id=${italianWord.id})}">
+                            <button type="submit" class="custom-button ml-3 text-danger border-0 font-weight-bold bg-transparent">
+                                Remove
+                            </button>
+                        </form>
+                    </div>
+            </div>
+        </div>
+
+
+        <form th:method="POST" th:action="@{/word/remove}">
+            <button type="submit" class="btn btn-danger border-0 font-weight-bold  removeAll" th:text="'Remove all ' + ${words.allSize} + ' words'">
+                Remove All
+            </button>
+        </form>
+
+
+<!--        <a href="/home/remove-all" class="btn btn-danger">Remove all {allWordsCount} words</a>-->
+    </div>
+</main>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</body>
+</html>
