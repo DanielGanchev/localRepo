@@ -1,7 +1,7 @@
 package org.softuni.model.entities;
 
 import jakarta.persistence.*;
-import org.softuni.model.entities.enums.ModelCategory;
+import org.softuni.model.entities.enums.ModelCategoryEnum;
 
 @Entity
 @Table(name = "models")
@@ -12,7 +12,7 @@ public class ModelEntity extends BaseEntity{
 
 
     @Enumerated(EnumType.STRING)
-    private ModelCategory category;
+    private ModelCategoryEnum category;
 
     @ManyToOne
     private BrandEntity brand;
@@ -29,11 +29,11 @@ public class ModelEntity extends BaseEntity{
         return this;
     }
 
-    public ModelCategory getCategory() {
+    public ModelCategoryEnum getCategory() {
         return category;
     }
 
-    public ModelEntity setCategory(ModelCategory category) {
+    public ModelEntity setCategory(ModelCategoryEnum category) {
         this.category = category;
         return this;
     }

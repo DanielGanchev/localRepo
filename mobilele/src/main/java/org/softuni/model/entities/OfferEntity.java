@@ -1,10 +1,13 @@
 package org.softuni.model.entities;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.JdbcType;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.softuni.model.entities.enums.EngineEnum;
-import org.softuni.model.entities.enums.Transmission;
+import org.softuni.model.entities.enums.TransmissionEnum;
 
 import java.math.BigDecimal;
 import java.sql.Types;
@@ -15,27 +18,42 @@ import java.util.UUID;
 @Table(name = "offers")
 public class OfferEntity extends BaseEntity{
 
+
+    @NotNull
     @JdbcTypeCode(Types.VARCHAR)
     private UUID uuid;
 
-
+    @NotEmpty
     private String description;
 
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public OfferEntity setUuid(UUID uuid) {
+        this.uuid = uuid;
+        return this;
+    }
+
+    @NotNull
     @ManyToOne
     private ModelEntity model;
-
+    @NotNull
     @Enumerated(EnumType.STRING)
     private EngineEnum engine;
-
+    @NotNull
     @Enumerated(EnumType.STRING)
-    private Transmission transmission;
-
+    private TransmissionEnum transmission;
+    @NotEmpty
     private String imageUrl;
-
+    @Positive
     private long mileage;
 
+    @NotNull
     private BigDecimal price;
 
+    @Min(1930)
     private int year;
 
     public OfferEntity() {
@@ -68,11 +86,11 @@ public class OfferEntity extends BaseEntity{
         return this;
     }
 
-    public Transmission getTransmission() {
+    public TransmissionEnum getTransmission() {
         return transmission;
     }
 
-    public OfferEntity setTransmission(Transmission transmission) {
+    public OfferEntity setTransmission(TransmissionEnum transmission) {
         this.transmission = transmission;
         return this;
     }

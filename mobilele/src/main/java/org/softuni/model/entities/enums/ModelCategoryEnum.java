@@ -1,6 +1,6 @@
 package org.softuni.model.entities.enums;
 
-public enum ModelCategory {
+public enum ModelCategoryEnum {
 
     CAR,
     TRUCK,
