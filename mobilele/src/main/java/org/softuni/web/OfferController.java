@@ -2,10 +2,12 @@ package org.softuni.web;
 
 import jakarta.validation.Valid;
 
+import org.softuni.model.dto.OfferDetailDTO;
 import org.softuni.model.entities.enums.EngineEnum;
 import org.softuni.model.entities.enums.TransmissionEnum;
 import org.softuni.service.BrandService;
 import org.softuni.service.OfferService;
+import org.softuni.service.exception.ObjectNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -82,8 +84,23 @@ public class OfferController {
     }
 
     @GetMapping("/{uuid}")
-    public String details(@PathVariable("uuid") UUID uuid){
+    public String details(@PathVariable("uuid") UUID uuid, Model model){
+
+        OfferDetailDTO offerDetailDTO = offerService
+                .getOfferDetails(uuid)
+                .orElseThrow(() ->new ObjectNotFoundException("Offer with uuid " + uuid + " not found"));;
+
+                model.addAttribute("offer", offerDetailDTO);
+
         return "details";
+    }
+
+    @DeleteMapping ("/{uuid}")
+    public String delete(@PathVariable("uuid") UUID uuid){
+
+        offerService.deleteOffer(uuid);
+
+        return "redirect:/offers/all";
     }
 
 
