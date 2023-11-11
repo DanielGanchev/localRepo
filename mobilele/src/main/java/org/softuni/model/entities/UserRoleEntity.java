@@ -1,6 +1,7 @@
 package org.softuni.model.entities;
 
 import jakarta.persistence.*;
+import org.softuni.model.entities.enums.UserRoleEnum;
 
 @Entity
 @Table(name = "user_role")

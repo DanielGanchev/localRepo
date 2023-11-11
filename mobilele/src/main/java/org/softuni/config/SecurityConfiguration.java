@@ -1,6 +1,6 @@
 package org.softuni.config;
 
-import org.softuni.model.entities.UserRoleEnum;
+import org.softuni.model.entities.enums.UserRoleEnum;
 import org.softuni.repository.UserRepository;
 import org.softuni.service.MobileleUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
